@@ -3,9 +3,17 @@
 [ext_resource type="Texture2D" uid="uid://bwu8k2u0k5eku" path="res://assets/hero/player/player-spritemap-v9.png" id="1_agfs1"]
 [ext_resource type="Script" uid="uid://cbcbvp04k3aic" path="res://scenes/a.gd" id="1_rkhd4"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_irmqu"]
+atlas = ExtResource("1_agfs1")
+region = Rect2(322, 0, 46, 50)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_rkhd4"]
 atlas = ExtResource("1_agfs1")
 region = Rect2(0, 0, 46, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7eonc"]
+atlas = ExtResource("1_agfs1")
+region = Rect2(276, 0, 46, 50)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lrhn5"]
 atlas = ExtResource("1_agfs1")
@@ -43,10 +51,26 @@ region = Rect2(322, 150, 46, 50)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_irmqu")
+}],
+"loop": true,
+"name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_rkhd4")
 }],
 "loop": true,
 "name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7eonc")
+}],
+"loop": true,
+"name": &"jump",
 "speed": 5.0
 }, {
 "frames": [{
@@ -89,8 +113,13 @@ script = ExtResource("1_rkhd4")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=485229505]
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_irmqu")
-animation = &"idle"
+animation = &"fall"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=348976698]
 position = Vector2(-4, 2)
 shape = SubResource("CapsuleShape2D_agfs1")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1939123075]
+position = Vector2(-7, -107)
+drag_vertical_enabled = true
+drag_vertical_offset = -0.6
