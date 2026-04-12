@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://cs48x5d4pnwit"]
+
+[ext_resource type="Texture2D" uid="uid://dmwnveqyuiixc" path="res://assets/City Background/Sky.png" id="1_4kc6w"]
+[ext_resource type="Texture2D" uid="uid://bx05vi1cepkm3" path="res://assets/City Background/City Background.png" id="2_boodw"]
+[ext_resource type="Texture2D" uid="uid://djl5iag5y8y" path="res://assets/City Background/City Foreground.png" id="3_40mfy"]
+
+[node name="fondo" type="Node2D" unique_id=803970439]
+
+[node name="Sky" type="Sprite2D" parent="." unique_id=821166785]
+texture_repeat = 2
+position = Vector2(665, 318)
+scale = Vector2(2.7479167, 1)
+texture = ExtResource("1_4kc6w")
+region_enabled = true
+region_rect = Rect2(-174.5, -115.5, 100000, 1000)
+
+[node name="Parallax2D2" type="Parallax2D" parent="." unique_id=73312406]
+scroll_scale = Vector2(0.7, 0.7)
+scroll_offset = Vector2(0.5, 0)
+repeat_times = 100
+
+[node name="CityBackground" type="Sprite2D" parent="Parallax2D2" unique_id=586796969]
+texture_repeat = 2
+position = Vector2(575.5, 329.5)
+scale = Vector2(1.0258929, 1.03625)
+texture = ExtResource("2_boodw")
+region_enabled = true
+region_rect = Rect2(0, 0, 10000, 800)
+
+[node name="Parallax2D" type="Parallax2D" parent="." unique_id=73933572]
+repeat_times = 100
+
+[node name="CityForeground" type="Sprite2D" parent="Parallax2D" unique_id=727814824]
+texture_repeat = 2
+position = Vector2(575, 329)
+scale = Vector2(1.0303571, 1.0425)
+texture = ExtResource("3_40mfy")
+region_enabled = true
+region_rect = Rect2(0, 0, 10000, 800)

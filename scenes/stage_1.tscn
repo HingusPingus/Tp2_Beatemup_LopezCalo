@@ -1,55 +1,16 @@
 [gd_scene format=3 uid="uid://c70qmc5upw626"]
 
-[ext_resource type="Texture2D" uid="uid://dmwnveqyuiixc" path="res://assets/City Background/Sky.png" id="1_kx1yv"]
+[ext_resource type="PackedScene" uid="uid://cs48x5d4pnwit" path="res://scenes/fondo.tscn" id="1_e77qm"]
 [ext_resource type="PackedScene" uid="uid://dci03tlc15q6t" path="res://scenes/character.tscn" id="1_usctx"]
-[ext_resource type="Texture2D" uid="uid://bx05vi1cepkm3" path="res://assets/City Background/City Background.png" id="2_e4xaw"]
 [ext_resource type="Script" uid="uid://d2laalnhj0n8d" path="res://scenes/character.gd" id="2_u47qm"]
-[ext_resource type="Texture2D" uid="uid://djl5iag5y8y" path="res://assets/City Background/City Foreground.png" id="3_tgiw8"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_usctx"]
-size = Vector2(1177, 20)
+[ext_resource type="PackedScene" uid="uid://bhki0i8ql4bqe" path="res://scenes/piso.tscn" id="4_kx1yv"]
 
 [node name="stage 1" type="Node2D" unique_id=1753927969]
 
-[node name="Sky" type="Sprite2D" parent="." unique_id=13301675]
-texture_repeat = 2
-position = Vector2(665, 318)
-scale = Vector2(2.7479167, 1)
-texture = ExtResource("1_kx1yv")
-region_enabled = true
-region_rect = Rect2(-174.5, -115.5, 100000, 1000)
-
-[node name="Parallax2D2" type="Parallax2D" parent="." unique_id=1027485016]
-scroll_scale = Vector2(0.7, 0.7)
-scroll_offset = Vector2(0.5, 0)
-repeat_times = 100
-
-[node name="CityBackground" type="Sprite2D" parent="Parallax2D2" unique_id=1284826747]
-texture_repeat = 2
-position = Vector2(575.5, 329.5)
-scale = Vector2(1.0258929, 1.03625)
-texture = ExtResource("2_e4xaw")
-region_enabled = true
-region_rect = Rect2(0, 0, 10000, 800)
-
-[node name="Parallax2D" type="Parallax2D" parent="." unique_id=39138169]
-repeat_times = 100
-
-[node name="CityForeground" type="Sprite2D" parent="Parallax2D" unique_id=2049090329]
-texture_repeat = 2
-position = Vector2(575, 329)
-scale = Vector2(1.0303571, 1.0425)
-texture = ExtResource("3_tgiw8")
-region_enabled = true
-region_rect = Rect2(0, 0, 10000, 800)
+[node name="fondo" parent="." unique_id=803970439 instance=ExtResource("1_e77qm")]
 
 [node name="CharacterBody2D" parent="." unique_id=905061377 instance=ExtResource("1_usctx")]
 position = Vector2(191, 496)
 script = ExtResource("2_u47qm")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1410246671]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1111243405]
-position = Vector2(577, 656)
-scale = Vector2(10000, 1)
-shape = SubResource("RectangleShape2D_usctx")
+[node name="piso" parent="." unique_id=641612810 instance=ExtResource("4_kx1yv")]

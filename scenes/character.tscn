@@ -1,19 +1,90 @@
 [gd_scene format=3 uid="uid://dci03tlc15q6t"]
 
 [ext_resource type="Texture2D" uid="uid://bwu8k2u0k5eku" path="res://assets/hero/player/player-spritemap-v9.png" id="1_agfs1"]
-[ext_resource type="Script" uid="uid://cbcbvp04k3aic" path="res://scenes/a.gd" id="1_rkhd4"]
+
+[sub_resource type="GDScript" id="GDScript_agfs1"]
+script/source = "extends CharacterBody2D
+
+
+const SPEED = 300.0
+const JUMP_VELOCITY = -400.0
+
+
+func _physics_process(delta: float) -> void:
+	# Add the gravity.
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+
+	# Handle jump.
+	if Input.is_action_just_pressed(\"ui_accept\") and is_on_floor():
+		velocity.y = JUMP_VELOCITY
+
+	# Get the input direction and handle the movement/deceleration.
+	# As good practice, you should replace UI actions with custom gameplay actions.
+	var direction := Input.get_axis(\"ui_left\", \"ui_right\")
+	if direction:
+		velocity.x = direction * SPEED
+	else:
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+
+	move_and_slide()
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rkhd4"]
+atlas = ExtResource("1_agfs1")
+region = Rect2(138, 0, 46, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_50cep"]
+atlas = ExtResource("1_agfs1")
+region = Rect2(92, 0, 46, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8yvht"]
+atlas = ExtResource("1_agfs1")
+region = Rect2(92, 0, 46, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lagn4"]
+atlas = ExtResource("1_agfs1")
+region = Rect2(138, 0, 46, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x8k1v"]
+atlas = ExtResource("1_agfs1")
+region = Rect2(0, 50, 46, 50)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_irmqu"]
 atlas = ExtResource("1_agfs1")
 region = Rect2(322, 0, 46, 50)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rkhd4"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_agfs1"]
 atlas = ExtResource("1_agfs1")
 region = Rect2(0, 0, 46, 50)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7eonc"]
 atlas = ExtResource("1_agfs1")
 region = Rect2(276, 0, 46, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ih8y6"]
+atlas = ExtResource("1_agfs1")
+region = Rect2(230, 50, 46, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cicko"]
+atlas = ExtResource("1_agfs1")
+region = Rect2(184, 50, 46, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bj47h"]
+atlas = ExtResource("1_agfs1")
+region = Rect2(138, 50, 46, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rbud2"]
+atlas = ExtResource("1_agfs1")
+region = Rect2(230, 0, 46, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vovfy"]
+atlas = ExtResource("1_agfs1")
+region = Rect2(184, 0, 46, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4lh0q"]
+atlas = ExtResource("1_agfs1")
+region = Rect2(138, 0, 46, 50)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lrhn5"]
 atlas = ExtResource("1_agfs1")
@@ -47,8 +118,42 @@ region = Rect2(276, 150, 46, 50)
 atlas = ExtResource("1_agfs1")
 region = Rect2(322, 150, 46, 50)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_u0pwc"]
+atlas = ExtResource("1_agfs1")
+region = Rect2(46, 100, 46, 50)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_irmqu"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rkhd4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_50cep")
+}],
+"loop": true,
+"name": &"alomancy_pull",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8yvht")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lagn4")
+}],
+"loop": true,
+"name": &"alomancy_push",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x8k1v")
+}],
+"loop": true,
+"name": &"damage",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_irmqu")
@@ -59,7 +164,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_rkhd4")
+"texture": SubResource("AtlasTexture_agfs1")
 }],
 "loop": true,
 "name": &"idle",
@@ -72,6 +177,39 @@ animations = [{
 "loop": true,
 "name": &"jump",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 0.1,
+"texture": SubResource("AtlasTexture_ih8y6")
+}, {
+"duration": 0.1,
+"texture": SubResource("AtlasTexture_cicko")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bj47h")
+}],
+"loop": true,
+"name": &"jump-punch",
+"speed": 3.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"jump_alomancy_push",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.1,
+"texture": SubResource("AtlasTexture_rbud2")
+}, {
+"duration": 0.1,
+"texture": SubResource("AtlasTexture_vovfy")
+}, {
+"duration": 1.25,
+"texture": SubResource("AtlasTexture_4lh0q")
+}],
+"loop": true,
+"name": &"punch",
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -101,6 +239,14 @@ animations = [{
 "loop": true,
 "name": &"run",
 "speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u0pwc")
+}],
+"loop": true,
+"name": &"slide",
+"speed": 5.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_agfs1"]
@@ -108,12 +254,13 @@ radius = 47.0
 height = 154.0
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=905061377]
-script = ExtResource("1_rkhd4")
+script = SubResource("GDScript_agfs1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=485229505]
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_irmqu")
-animation = &"fall"
+animation = &"jump-punch"
+frame_progress = 0.20564725
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=348976698]
 position = Vector2(-4, 2)
@@ -123,3 +270,9 @@ shape = SubResource("CapsuleShape2D_agfs1")
 position = Vector2(-7, -107)
 drag_vertical_enabled = true
 drag_vertical_offset = -0.6
+
+[node name="piña" type="Area2D" parent="." unique_id=2049261914]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="piña" unique_id=70860226]
+position = Vector2(0, -26)
+polygon = PackedVector2Array(-2, -22, 47, -25, 53, 4, 46, 23, 0, 19)
