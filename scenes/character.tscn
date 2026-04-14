@@ -259,20 +259,22 @@ script = SubResource("GDScript_agfs1")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=485229505]
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_irmqu")
-animation = &"jump-punch"
-frame_progress = 0.20564725
+animation = &"punch"
+frame = 2
+frame_progress = 0.98029435
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=348976698]
 position = Vector2(-4, 2)
 shape = SubResource("CapsuleShape2D_agfs1")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1939123075]
-position = Vector2(-7, -107)
+position = Vector2(0, -107)
 drag_vertical_enabled = true
 drag_vertical_offset = -0.6
 
 [node name="piña" type="Area2D" parent="." unique_id=2049261914]
+collision_mask = 16
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="piña" unique_id=70860226]
 position = Vector2(0, -26)
-polygon = PackedVector2Array(-2, -22, 47, -25, 53, 4, 46, 23, 0, 19)
+polygon = PackedVector2Array(-2, -22, 70, -29, 76, 1, 73, 25, 0, 19)
