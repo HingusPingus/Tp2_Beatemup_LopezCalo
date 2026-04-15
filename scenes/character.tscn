@@ -54,6 +54,10 @@ region = Rect2(0, 50, 46, 50)
 atlas = ExtResource("1_agfs1")
 region = Rect2(322, 0, 46, 50)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_7qyni"]
+atlas = ExtResource("1_agfs1")
+region = Rect2(0, 100, 46, 50)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_agfs1"]
 atlas = ExtResource("1_agfs1")
 region = Rect2(0, 0, 46, 50)
@@ -73,6 +77,10 @@ region = Rect2(184, 50, 46, 50)
 [sub_resource type="AtlasTexture" id="AtlasTexture_bj47h"]
 atlas = ExtResource("1_agfs1")
 region = Rect2(138, 50, 46, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sougf"]
+atlas = ExtResource("1_agfs1")
+region = Rect2(46, 100, 46, 50)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rbud2"]
 atlas = ExtResource("1_agfs1")
@@ -164,6 +172,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_7qyni")
+}],
+"loop": true,
+"name": &"fall_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_agfs1")
 }],
 "loop": true,
@@ -195,6 +211,14 @@ animations = [{
 "frames": [],
 "loop": true,
 "name": &"jump_alomancy_push",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sougf")
+}],
+"loop": true,
+"name": &"lying",
 "speed": 5.0
 }, {
 "frames": [{
@@ -259,9 +283,7 @@ script = SubResource("GDScript_agfs1")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=485229505]
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_irmqu")
-animation = &"punch"
-frame = 2
-frame_progress = 0.98029435
+animation = &"lying"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=348976698]
 position = Vector2(-4, 2)
@@ -273,7 +295,7 @@ drag_vertical_enabled = true
 drag_vertical_offset = -0.6
 
 [node name="piña" type="Area2D" parent="." unique_id=2049261914]
-collision_mask = 16
+collision_mask = 32
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="piña" unique_id=70860226]
 position = Vector2(0, -26)

@@ -1,11 +1,12 @@
 extends CharacterBody2D
 
+class_name Player
 @onready var _animated_sprite = $AnimatedSprite2D
 @onready var hitbox = $piña
-var speed=300
+const speed=300
 const JUMP_VELOCITY = -400.0
 var jumping
-var hit_cd=0.25
+var punch_cd=0.25
 var can_attack=true
 var hitting=false
 var timer
@@ -14,11 +15,11 @@ var lastAxis=1
 var yPosition:float
 
 func _physics_process(delta: float) -> void:
-	if position.y>yPosition:
+	if jumping:
 		velocity += get_gravity() * delta
 		
-	if Input.is_action_pressed("melee_attack") and can_attack:
-		timer=get_tree().create_timer(hit_cd)
+	if Input.is_action_just_pressed("melee_attack") and can_attack:
+		timer=get_tree().create_timer(punch_cd)
 		timer.timeout.connect(animation_cd)
 		hitting=true
 		if !jumping:
@@ -26,47 +27,54 @@ func _physics_process(delta: float) -> void:
 		else:
 			_animated_sprite.play("jump-punch")
 		can_attack = false
-		timer=get_tree().create_timer(hit_cd)
+		timer=get_tree().create_timer(punch_cd)
 		timer.timeout.connect(cd_reset)
 		for i in hitbox.get_overlapping_bodies():
 			if i is Enemy:
 				i.take_damage(damage)
 	# Handle jump.
 	
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-		jumping=true;
-	elif is_on_floor():
-		jumping=false;
+	
 		
-	if Input.is_action_just_pressed("ui_left") and lastAxis==1:
+	if  Input.is_action_pressed("ui_left") and lastAxis==1 and !Input.is_action_pressed("ui_right"):
 		scale.x=-1
 		lastAxis=-1
-		
-	if Input.is_action_just_pressed("ui_right") and lastAxis==-1:
+	elif Input.is_action_pressed("ui_right") and lastAxis==-1 and !Input.is_action_pressed("ui_left"):
 		scale.x=-1
 		lastAxis=1
 		
+	if Input.is_action_just_pressed("ui_accept"):
+		velocity.y = JUMP_VELOCITY
+		jumping=true;
+		set_collision_mask_value(4,true)
+		set_collision_mask_value(5,false)
+
+	elif global_position.y>=yPosition:
+		jumping=false;
+		set_collision_mask_value(4,false)
+		set_collision_mask_value(5,true)
 	elif velocity.y>0 and jumping and !hitting:
 		_animated_sprite.play("fall")
 	elif jumping and !hitting:
 		_animated_sprite.play("jump")
-	var directiony := Input.get_axis("ui_up", "ui_down")
-	var directionx := Input.get_axis("ui_left","ui_right")
-	
-	if directiony and(!hitting):
-		velocity.y=directiony*speed
-		yPosition=position.y
-	
-	if directionx and (!hitting or jumping):
+	var direction = Input.get_vector("ui_left","ui_right","ui_up","ui_down")
+	if direction and (!hitting or jumping):
+		if(jumping):
+			velocity.x=direction.x*speed
+		else:
+			velocity=direction*speed
+			yPosition=global_position.y
+
+
 		if !jumping:
 			_animated_sprite.play("run")
-		velocity.x=directionx*speed
 	else:
-		if is_on_floor() and !hitting:
+		if !jumping and !hitting:
 			_animated_sprite.play("idle")
 			
 		velocity.x = move_toward(velocity.x, 0, speed)
+		if(!jumping):
+			velocity.y = move_toward(velocity.y, 0, speed)
 		
 	move_and_slide()
 	

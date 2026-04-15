@@ -2,27 +2,27 @@
 
 [ext_resource type="PackedScene" uid="uid://cs48x5d4pnwit" path="res://scenes/fondo.tscn" id="1_e77qm"]
 [ext_resource type="PackedScene" uid="uid://dci03tlc15q6t" path="res://scenes/character.tscn" id="1_usctx"]
-[ext_resource type="Script" uid="uid://d2laalnhj0n8d" path="res://scenes/character.gd" id="2_u47qm"]
+[ext_resource type="Script" uid="uid://d2laalnhj0n8d" path="res://scripts/character.gd" id="4_e4xaw"]
 [ext_resource type="PackedScene" uid="uid://bhki0i8ql4bqe" path="res://scenes/piso.tscn" id="4_kx1yv"]
-[ext_resource type="PackedScene" uid="uid://cn0jv8n4mjen2" path="res://scenes/character_body_2d_2.tscn" id="5_kx1yv"]
-[ext_resource type="Script" uid="uid://br0v64bwss5us" path="res://scenes/bicho.gd" id="6_e4xaw"]
+[ext_resource type="Script" uid="uid://br0v64bwss5us" path="res://scripts/bicho.gd" id="6_tgiw8"]
 
 [node name="stage 1" type="Node2D" unique_id=1753927969]
 
 [node name="fondo" parent="." unique_id=803970439 instance=ExtResource("1_e77qm")]
 
+[node name="techo" parent="fondo" unique_id=1109427742 instance=ExtResource("4_kx1yv")]
+position = Vector2(9, -353)
+collision_layer = 247
+
 [node name="piso" parent="fondo" unique_id=641612810 instance=ExtResource("4_kx1yv")]
 collision_layer = 255
 
-[node name="CharacterBody2D" parent="." unique_id=905061377 instance=ExtResource("1_usctx")]
+[node name="player" parent="." unique_id=905061377 instance=ExtResource("1_usctx")]
 position = Vector2(191, 496)
 collision_mask = 16
-script = ExtResource("2_u47qm")
+script = ExtResource("4_e4xaw")
 
-[node name="piso" parent="." unique_id=1109427742 instance=ExtResource("4_kx1yv")]
-position = Vector2(4, -257)
-collision_layer = 255
-
-[node name="CharacterBody2D2" parent="." unique_id=1457938659 instance=ExtResource("5_kx1yv")]
-position = Vector2(317, 454)
-script = ExtResource("6_e4xaw")
+[node name="player2" parent="." unique_id=1714790541 instance=ExtResource("1_usctx")]
+position = Vector2(444, 490)
+collision_layer = 32
+script = ExtResource("6_tgiw8")
