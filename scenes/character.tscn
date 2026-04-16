@@ -48,6 +48,10 @@ region = Rect2(138, 0, 46, 50)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x8k1v"]
 atlas = ExtResource("1_agfs1")
+region = Rect2(0, 0, 46, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p478o"]
+atlas = ExtResource("1_agfs1")
 region = Rect2(0, 50, 46, 50)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_irmqu"]
@@ -155,10 +159,13 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 0.2,
 "texture": SubResource("AtlasTexture_x8k1v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p478o")
 }],
-"loop": true,
+"loop": false,
 "name": &"damage",
 "speed": 5.0
 }, {
@@ -231,7 +238,7 @@ animations = [{
 "duration": 1.25,
 "texture": SubResource("AtlasTexture_4lh0q")
 }],
-"loop": true,
+"loop": false,
 "name": &"punch",
 "speed": 3.0
 }, {
@@ -283,7 +290,7 @@ script = SubResource("GDScript_agfs1")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=485229505]
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_irmqu")
-animation = &"lying"
+animation = &"punch"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=348976698]
 position = Vector2(-4, 2)
