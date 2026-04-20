@@ -52,14 +52,18 @@ func animation_cd():
 	
 
 func fall(direction,drained,pwr):
+	var dir
 	if(direction):
-		looking=direction
+		dir=direction
+	else:
+		dir=looking
 	if(!drained and pwr==null):
-		velocity.x = -speed*looking
+		velocity.x = -speed*dir
 	elif pwr:
 		print("hola")
-		velocity.x = (speed+pwr)*looking
+		velocity.x = (speed+pwr)*dir
 	falling=true;
+	yPosition = global_position.y + 1
 	_animated_sprite.play("fall_down")
 	velocity.y =-200
 func jump(wannaJump):
@@ -99,11 +103,10 @@ func animation_hit_cd():
 		get_hit=false
 
 
-func take_damage(dmg,direction,drained):
+func take_damage(dmg,direction,drained,char):
 	get_hit=true
 	combo+=2
-	if(drained):
-		combo-=1
+
 
 	if direction==left and looking==left:
 		scale.x=-1
@@ -117,34 +120,31 @@ func take_damage(dmg,direction,drained):
 	timer=get_tree().create_timer(hit_cd)
 	timer.timeout.connect(animation_hit_cd)
 	if drain:
-		dmg*2
+		dmg*=2
 	health-=dmg	
-	if(combo>=3 and !drained):
+	if(combo>=3 and !drained and char is Enemy):
 		fall(null,drained,null)
 
 
 func move(direction):
 	if not(falling or lying):
 		if direction and (!hitting or jumping):
-			
+
 			if(jumping):
 				velocity.x=direction.x*speed
 			else:
 				velocity=direction*speed
-
+			
 			if !jumping:
 				_animated_sprite.play("run")
 		else:
-			if !jumping and !hitting and !get_hit:
+			if (!jumping and !hitting and !get_hit):
 				_animated_sprite.play("idle")
-				
 			velocity.x = move_toward(velocity.x, 0, speed)
 			if(!jumping):
 				velocity.y = move_toward(velocity.y, 0, speed)
-	if direction is Vector2 :
-		move_and_slide()
-	else:
-		self.position = lerp(self.position,direction,speed)
+	move_and_slide()
+		
 func punch():
 	if  can_attack and !falling and !lying:
 		timer=get_tree().create_timer(punch_cd)
@@ -163,10 +163,10 @@ func punch():
 			power-=5
 		if(drain):
 			totaldamage=damage/2
-			power+10
+			power+=10
 		for i in hitbox.get_overlapping_bodies():
-			if(i is Enemy and i.getZIndex()<=z_index+30 and i.getZIndex()>=z_index-30):
-				i.take_damage(totaldamage,looking,drain)
+			if(i is Character and i.getZIndex()<=z_index+30 and i.getZIndex()>=z_index-30):
+				i.take_damage(totaldamage,looking,drain,i)
 			
 			
 func getZIndex():
