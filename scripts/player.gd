@@ -24,4 +24,10 @@ func _process(delta: float) -> void:
 		super.pull()
 	if(Input.is_action_just_pressed("alomancy_push")):
 		super.push()
+	if(Input.is_action_just_pressed("switch_drain")):
+		super.changeMode(1)
+	if(Input.is_action_just_pressed("switch_power")):
+		super.changeMode(2)
+	if(Input.is_action_just_pressed("switch_normal")):
+		super.changeMode(3)
 	
