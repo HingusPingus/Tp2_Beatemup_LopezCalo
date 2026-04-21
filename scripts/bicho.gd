@@ -2,21 +2,40 @@ extends Character
 
 class_name Enemy
 @onready var player=$"../player"
-@onready var areaPersonal=$"piña"
+@onready var areaAgresion=$"piña"
+@onready var areaPersonal=$areaPersonal
 var direction
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	health=500
+	speed=150
+	punch_cd=1
+	hit_cd=0.5
+	damage=25
+
 	pass
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	if areaPersonal.has_overlapping_bodies() or falling or lying:
-		direction=Vector2.ZERO
-		super.punch()
-	else:
-		direction=global_position.direction_to(player.global_position)
+func _process(_delta: float) -> void:
+	direction=global_position.direction_to(player.global_position)
+
+	if areaAgresion.has_overlapping_areas() or falling or lying:
+		for i in areaAgresion.get_overlapping_areas():
+			if(i is Auch and i.get_parent().getZIndex()<=z_index+30 and i.get_parent().getZIndex()>=z_index-30):
+				direction=Vector2.ZERO
+				super.punch()
+	#elif areaPersonal.
+		#for i in areaPersonal.get_overlapping_bodies():
+			#if i is Character and i.getZIndex()<=z_index+30 and i.getZIndex()>=z_index-30 and i!=self:
+				#print(pos*(i.global_position.x-global_position.x))
+
+				#if(pos*(i.global_position.x-global_position.x)>0):
+					#direction=Vector2.ZERO
+
 	super.jump(false)
 	var pos=player.global_position.x-global_position.x
+
 	if(pos<0 and looking==right):
 		scale.x=-1
 		looking=left

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dci03tlc15q6t"]
 
 [ext_resource type="Texture2D" uid="uid://bwu8k2u0k5eku" path="res://assets/hero/player/player-spritemap-v9.png" id="1_agfs1"]
+[ext_resource type="Script" uid="uid://cer3vflk7o2j7" path="res://scripts/auch.gd" id="2_rkhd4"]
 
 [sub_resource type="GDScript" id="GDScript_agfs1"]
 script/source = "extends CharacterBody2D
@@ -317,22 +318,17 @@ animations = [{
 radius = 47.0
 height = 154.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rkhd4"]
+radius = 14.0
+height = 90.0
+
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=905061377]
 script = SubResource("GDScript_agfs1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=485229505]
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_irmqu")
-animation = &"alomancy_push"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=348976698]
-position = Vector2(-4, 2)
-shape = SubResource("CapsuleShape2D_agfs1")
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1939123075]
-position = Vector2(0, -107)
-drag_vertical_enabled = true
-drag_vertical_offset = -0.6
+animation = &"damage"
 
 [node name="piña" type="Area2D" parent="." unique_id=2049261914]
 collision_mask = 32
@@ -347,3 +343,17 @@ collision_mask = 32
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="alomancy" unique_id=1867749535]
 position = Vector2(2, -6)
 polygon = PackedVector2Array(8, 83, 368, 140, 475, -25, 338, -151, 1, -51)
+
+[node name="auch" type="Area2D" parent="." unique_id=1331410250]
+collision_mask = 32
+script = ExtResource("2_rkhd4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="auch" unique_id=1881947103]
+position = Vector2(-4, 2)
+shape = SubResource("CapsuleShape2D_agfs1")
+debug_color = Color(0.89308935, 0.17552009, 0.6688114, 0.41960785)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=1479891234]
+position = Vector2(-7, 60)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_rkhd4")

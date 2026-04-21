@@ -3,10 +3,9 @@ extends CharacterBody2D
 class_name Character
 
 @onready var _animated_sprite = $AnimatedSprite2D
-@onready var hitbox = $piña
-@onready var alomancy = $alomancy
-
-const speed=300
+@onready var hitbox:Area2D = $piña
+@onready var auch:Auch = $auch
+var speed
 const JUMP_VELOCITY = -400
 
 var jumping=false
@@ -16,13 +15,13 @@ var falling=false
 var lying=false
 
 var can_attack=true
-var punch_cd=0.25
-var hit_cd=0.5
+var punch_cd
+var hit_cd
 var timer
 
-var damage=50
+var damage
 var combo=0
-var health =1000
+var health
 var power=0
 
 var drain=false
@@ -53,6 +52,9 @@ func animation_cd():
 
 func fall(direction,drained,pwr):
 	var dir
+	set_collision_mask_value(4,true)
+	set_collision_mask_value(6,false)
+	
 	if(direction):
 		dir=direction
 	else:
@@ -60,7 +62,6 @@ func fall(direction,drained,pwr):
 	if(!drained and pwr==null):
 		velocity.x = -speed*dir
 	elif pwr:
-		print("hola")
 		velocity.x = (speed+pwr)*dir
 	falling=true;
 	yPosition = global_position.y + 1
@@ -79,9 +80,12 @@ func jump(wannaJump):
 			falling=false
 			velocity.x=0
 			velocity.y=0
+
 			_animated_sprite.play("lying")
 
 			await get_tree().create_timer(0.5).timeout
+			set_collision_mask_value(4,false)
+			set_collision_mask_value(6,true)
 			lying=false
 
 		jumping=false
@@ -96,33 +100,27 @@ func animation_hit_cd():
 	
 	if(combo):
 		combo-=1
-		get_tree().create_timer(0.5).timeout
+		await get_tree().create_timer(hit_cd/2).timeout
 		combo-=1
 
 	if(combo==0):
 		get_hit=false
 
 
-func take_damage(dmg,direction,drained,char):
+func take_damage(dmg,drained,pj):
 	get_hit=true
 	combo+=2
+	print("hit")
 
-
-	if direction==left and looking==left:
-		scale.x=-1
-		looking=right
-	elif direction==right and looking==right:
-		scale.x=-1
-		looking=left
 	_animated_sprite.play("damage")
 	velocity.x=0
 	velocity.y=0
-	timer=get_tree().create_timer(hit_cd)
+	timer=get_tree().create_timer(hit_cd/2)
 	timer.timeout.connect(animation_hit_cd)
 	if drain:
 		dmg*=2
 	health-=dmg	
-	if(combo>=3 and !drained and char is Enemy):
+	if(combo>=3 and !drained and pj.get_parent() is Enemy):
 		fall(null,drained,null)
 
 
@@ -147,7 +145,7 @@ func move(direction):
 		
 func punch():
 	if  can_attack and !falling and !lying:
-		timer=get_tree().create_timer(punch_cd)
+		timer=get_tree().create_timer(0.25)
 		timer.timeout.connect(animation_cd)
 		hitting=true
 		if !jumping:
@@ -157,64 +155,19 @@ func punch():
 		can_attack = false
 		timer=get_tree().create_timer(punch_cd)
 		timer.timeout.connect(cd_reset)
-		var totaldamage=damage
+		var totaldamage
 		if(pwrUp):
-			totaldamage+=power
+			totaldamage=power
 			power-=5
-		if(drain):
+		elif(drain):
 			totaldamage=damage/2
 			power+=10
-		for i in hitbox.get_overlapping_bodies():
-			if(i is Character and i.getZIndex()<=z_index+30 and i.getZIndex()>=z_index-30):
-				i.take_damage(totaldamage,looking,drain,i)
+		else:
+			totaldamage=damage
+		for i in hitbox.get_overlapping_areas():
+			if(i is Auch and i.get_parent().getZIndex()<=z_index+30 and i.get_parent().getZIndex()>=z_index-30):
+				i.get_parent().take_damage(totaldamage,drain,i)
 			
 			
 func getZIndex():
 	return z_index
-func pull():
-	if  can_attack and !falling and !lying and power>=10:
-		power-=10
-		timer=get_tree().create_timer(punch_cd)
-		timer.timeout.connect(animation_cd)
-		hitting=true
-		if !jumping:
-			_animated_sprite.play("alomancy_pull")
-		else:
-			_animated_sprite.play("jump_alomancy_pull")
-		can_attack = false
-		timer=get_tree().create_timer(punch_cd)
-		timer.timeout.connect(cd_reset)
-		for i in alomancy.get_overlapping_bodies():
-			if(i is Enemy):
-				i.fall(looking*-1,false,power)
-				
-func push():
-	if  can_attack and !falling and !lying and power>=10:
-		power-=10
-		timer=get_tree().create_timer(punch_cd)
-		timer.timeout.connect(animation_cd)
-		hitting=true
-		if !jumping:
-			_animated_sprite.play("alomancy_push")
-		else:
-			_animated_sprite.play("jump_alomancy_push")
-		can_attack = false
-		timer=get_tree().create_timer(punch_cd)
-		timer.timeout.connect(cd_reset)
-		for i in alomancy.get_overlapping_bodies():
-			if(i is Enemy):
-				i.fall(looking,false, power)
-
-func changeMode(choice):
-	if choice==1:
-		pwrUp=false
-		drain=true
-	elif choice==2:
-		pwrUp=true
-		drain=false
-	else:
-		pwrUp=false
-		drain=false
-		
-func getPosition():
-	return position

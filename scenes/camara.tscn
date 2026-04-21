@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://7wjep6auxcwh"]
+
+[ext_resource type="Script" uid="uid://uetr0c2d6od1" path="res://scripts/camera_2d.gd" id="1_g5i2v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e77qm"]
+size = Vector2(104, 694)
+
+[node name="Camera2D" type="Camera2D" unique_id=1081808381]
+drag_vertical_enabled = true
+drag_vertical_offset = -0.6
+script = ExtResource("1_g5i2v")
+
+[node name="paredDer" type="StaticBody2D" parent="." unique_id=1756427170]
+position = Vector2(-563, -579)
+collision_layer = 255
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="paredDer" unique_id=1543749983]
+position = Vector2(-62, 554)
+shape = SubResource("RectangleShape2D_e77qm")
+
+[node name="paredIzq" type="StaticBody2D" parent="." unique_id=1716029243]
+collision_layer = 255
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="paredIzq" unique_id=584222591]
+position = Vector2(628, -29)
+shape = SubResource("RectangleShape2D_e77qm")

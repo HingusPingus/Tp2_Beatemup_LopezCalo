@@ -3,8 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cs48x5d4pnwit" path="res://scenes/fondo.tscn" id="1_e77qm"]
 [ext_resource type="PackedScene" uid="uid://dci03tlc15q6t" path="res://scenes/character.tscn" id="1_usctx"]
 [ext_resource type="Script" uid="uid://crfxebt4ge1h2" path="res://scripts/player.gd" id="4_e4xaw"]
-[ext_resource type="PackedScene" uid="uid://go372voukovs" path="res://scenes/enemy.tscn" id="4_kx1yv"]
-[ext_resource type="Script" uid="uid://br0v64bwss5us" path="res://scripts/bicho.gd" id="6_tgiw8"]
+[ext_resource type="PackedScene" uid="uid://7wjep6auxcwh" path="res://scenes/camara.tscn" id="4_e77qm"]
 
 [node name="stage 1" type="Node2D" unique_id=1753927969]
 
@@ -14,10 +13,8 @@ position = Vector2(326, -274)
 [node name="player" parent="." unique_id=905061377 instance=ExtResource("1_usctx")]
 position = Vector2(188, 620)
 collision_mask = 16
+platform_floor_layers = 4294967040
 script = ExtResource("4_e4xaw")
 
-[node name="enemy" parent="." unique_id=126929567 instance=ExtResource("4_kx1yv")]
-position = Vector2(443, 618)
-collision_layer = 32
-collision_mask = 2
-script = ExtResource("6_tgiw8")
+[node name="Camera2D" parent="." unique_id=1081808381 instance=ExtResource("4_e77qm")]
+position = Vector2(563, 579)
