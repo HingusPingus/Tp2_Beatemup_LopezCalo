@@ -1,7 +1,8 @@
 extends Node2D
 
 const ENEMY_MAP :={
-	Character.Type.ENEMY:preload("res://scenes/enemy.tscn")
+	Character.Type.ENEMY:preload("res://scenes/enemy.tscn"),
+	Character.Type.BIGENEMY:preload("res://scenes/big_enemy.tscn")
 }
 @export var player:Player
 func _ready() -> void:

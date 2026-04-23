@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://7wjep6auxcwh"]
 
 [ext_resource type="Script" uid="uid://uetr0c2d6od1" path="res://scripts/camera_2d.gd" id="1_g5i2v"]
+[ext_resource type="PackedScene" uid="uid://cxv5y8qtg1l63" path="res://scenes/health_bar.tscn" id="2_bc1v1"]
+[ext_resource type="Script" uid="uid://d22iggmcjpqnb" path="res://scripts/health_bar.gd" id="3_l3wcf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e77qm"]
 size = Vector2(104, 694)
@@ -24,3 +26,12 @@ collision_layer = 16
 [node name="CollisionShape2D" type="CollisionShape2D" parent="paredDer" unique_id=584222591]
 position = Vector2(628, -29)
 shape = SubResource("RectangleShape2D_e77qm")
+
+[node name="ProgressBar" parent="." unique_id=482036933 instance=ExtResource("2_bc1v1")]
+offset_left = -528.0
+offset_top = -344.0
+offset_right = -232.0
+offset_bottom = -317.0
+max_value = 1000.0
+show_percentage = false
+script = ExtResource("3_l3wcf")

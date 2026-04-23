@@ -5,11 +5,9 @@ class_name	Player
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	health=1000
-	punch_cd=0.25
-	hit_cd=0.25
-	speed=300
-	damage=50
+	
+	Global.setMaxValue.emit(max_health)
+	Global.setHealthBar.emit(health)
 
 	pass # Replace with function body.
 
@@ -77,11 +75,16 @@ func changeMode(choice):
 	if choice==1:
 		pwrUp=false
 		drain=true
+		healthy=false
 	elif choice==2:
 		pwrUp=true
 		drain=false
+		healthy=false
 	else:
 		pwrUp=false
 		drain=false
-		
-	
+		healthy=true
+
+func changeHealth(dmg):
+	health-=dmg
+	Global.setHealthBar.emit(health)

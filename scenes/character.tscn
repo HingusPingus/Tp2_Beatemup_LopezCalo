@@ -297,6 +297,11 @@ height = 90.0
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=905061377]
 script = ExtResource("1_lrhn5")
+speed = 300
+punch_cd = 0.25
+hit_cd = 0.25
+damage = 50
+max_health = 1000
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=485229505]
 scale = Vector2(3, 3)

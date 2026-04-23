@@ -17,6 +17,8 @@ func _process(_delta: float) -> void:
 	if activado and enemy_data.size()>0:
 		var enemy=enemy_data.pop_front()
 		EntityManager.spawnEnemy.emit(enemy)
+	elif(activado):
+		queue_free()
 		
 func on_player_enter(_player):
 	if !activado:

@@ -16,6 +16,7 @@ position = Vector2(326, -274)
 position = Vector2(188, 620)
 collision_mask = 16
 platform_floor_layers = 4294967040
+type = null
 
 [node name="Camera2D" parent="." unique_id=1081808381 instance=ExtResource("4_e77qm")]
 position = Vector2(563, 579)

@@ -161,7 +161,12 @@ height = 90.0
 collision_layer = 32
 collision_mask = 34
 script = ExtResource("1_4ra3w")
+speed = 150
 type = 1
+punch_cd = 1.0
+hit_cd = 5.0
+damage = 25
+max_health = 200
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=485229505]
 scale = Vector2(3, 3)

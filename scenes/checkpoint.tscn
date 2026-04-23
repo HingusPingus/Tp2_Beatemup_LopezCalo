@@ -5,9 +5,6 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xam77"]
 size = Vector2(111, 645.5)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_yyywg"]
-size = Vector2(1152, 648)
-
 [node name="checkpoint" type="Node2D" unique_id=1874215775]
 script = ExtResource("1_yyywg")
 
@@ -19,10 +16,3 @@ collision_layer = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="detectionArea" unique_id=939055506]
 position = Vector2(560, 325)
 shape = SubResource("RectangleShape2D_xam77")
-
-[node name="playArea" type="Area2D" parent="." unique_id=1736011037]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="playArea" unique_id=215983114]
-position = Vector2(576, 324)
-shape = SubResource("RectangleShape2D_yyywg")
-debug_color = Color(0.3902502, 0.49680382, 0.92937213, 0.41960785)

@@ -1,13 +1,15 @@
-extends CharacterBody2D
+@abstract
+class_name Character extends CharacterBody2D
 
-class_name Character
 
 @onready var _animated_sprite = $AnimatedSprite2D
 @onready var hitbox:Area2D = $piña
 @onready var auch:Auch = $auch
-var speed
+@export var speed:int
 const JUMP_VELOCITY = -400
 @export var type:Type
+
+
 
 var jumping=false
 var hitting=false
@@ -16,24 +18,26 @@ var falling=false
 var lying=false
 
 var can_attack=true
-var punch_cd
-var hit_cd
+@export var punch_cd:float
+@export var hit_cd:float
 var timer
 
-var damage
+@export var damage:int
 var combo=0
-var health
+@export var max_health:int
+@onready var health=max_health
 var power=0
 
 var drain=false
 var pwrUp=false
+var healthy=false
 
 const right=1
 const left=-1
 var yPosition:float
 var looking=right
 
-enum Type{PLAYER,ENEMY,BOSS}
+enum Type{PLAYER,ENEMY,BOSS,BIGENEMY}
 
 func _physics_process(delta: float) -> void:
 	if jumping or falling:
@@ -66,6 +70,7 @@ func fall(direction,drained,pwr):
 		velocity.x = -speed*dir
 	elif pwr:
 		velocity.x = (speed+pwr)*dir
+	changeHealth(pwr)
 	falling=true;
 	yPosition = global_position.y + 1
 	_animated_sprite.play("fall_down")
@@ -122,7 +127,7 @@ func take_damage(dmg,drained,pj):
 	timer.timeout.connect(animation_hit_cd)
 	if drain:
 		dmg*=2
-	health-=dmg	
+	changeHealth(dmg)
 	if(combo>=3 and !drained and pj.get_parent() is Enemy):
 		fall(null,drained,null)
 
@@ -167,6 +172,8 @@ func punch():
 			power+=10
 		else:
 			totaldamage=damage
+		if(healthy and health+damage/2<=max_health):
+			health+=damage/2
 		for i in hitbox.get_overlapping_areas():
 			if(i is Auch and i.get_parent().getZIndex()<=z_index+30 and i.get_parent().getZIndex()>=z_index-30):
 				i.get_parent().take_damage(totaldamage,drain,i)
@@ -174,3 +181,6 @@ func punch():
 			
 func getZIndex():
 	return z_index
+	
+func changeHealth(dmg):
+	health-=dmg

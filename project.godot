@@ -17,6 +17,7 @@ config/features=PackedStringArray("4.6", "Forward Plus")
 [autoload]
 
 EntityManager="*uid://bn45lq3e8ps1p"
+Global="*uid://be7uj7v3mkxhi"
 
 [input]
 
