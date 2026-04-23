@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://bsbfvpqqgbtx3" path="res://assets/SMS Brawler Tile Set Military Base Files/SMS_Brawler_Tile_set_16x16_128_2.png" id="6_ujmeh"]
 [ext_resource type="Texture2D" uid="uid://vogaimo6g8kc" path="res://assets/SMS Brawler Tile Set Military Base Files/SMS_Brawler_TileSet_16x16_128_1.png" id="7_w0tcn"]
 [ext_resource type="Texture2D" uid="uid://byyw8o0o2iocw" path="res://assets/SMS Brawler Tile Set Military Base Files/SMS_Brawler_TileSet_8x8_128.png" id="8_w0tcn"]
+[ext_resource type="PackedScene" uid="uid://d1dwct201cihw" path="res://scenes/checkpoint.tscn" id="9_ebinj"]
+[ext_resource type="PackedScene" uid="uid://go372voukovs" path="res://scenes/enemy.tscn" id="10_770vq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r1p76"]
 texture = ExtResource("5_40mfy")
@@ -432,7 +434,7 @@ sources/1 = SubResource("TileSetAtlasSource_8qpcn")
 sources/2 = SubResource("TileSetAtlasSource_ebinj")
 sources/3 = SubResource("TileSetAtlasSource_770vq")
 
-[node name="fondo" type="Node2D" unique_id=803970439]
+[node name="stage" type="Node2D" unique_id=803970439]
 
 [node name="Sky" type="Sprite2D" parent="." unique_id=821166785]
 texture_repeat = 2
@@ -474,8 +476,33 @@ tile_set = SubResource("TileSet_ujmeh")
 
 [node name="techo" parent="." unique_id=641612810 instance=ExtResource("4_boodw")]
 position = Vector2(10, 160)
-collision_layer = 247
+collision_layer = 246
 
 [node name="piso" parent="." unique_id=1486052032 instance=ExtResource("4_boodw")]
 position = Vector2(28, 458)
-collision_layer = 255
+collision_layer = 254
+
+[node name="checkpoints" type="Node2D" parent="." unique_id=2024521087]
+
+[node name="checkpoint" parent="checkpoints" unique_id=1874215775 instance=ExtResource("9_ebinj")]
+position = Vector2(848, 498)
+
+[node name="CharacterBody2D" parent="checkpoints/checkpoint/Enemies" parent_id_path=PackedInt32Array(1874215775, 427720287) index="0" unique_id=905061377 instance=ExtResource("10_770vq")]
+position = Vector2(-167, 530)
+
+[node name="CharacterBody2D5" parent="checkpoints/checkpoint/Enemies" parent_id_path=PackedInt32Array(1874215775, 427720287) index="1" unique_id=1910482525 instance=ExtResource("10_770vq")]
+position = Vector2(1318, 425)
+
+[node name="CharacterBody2D4" parent="checkpoints/checkpoint/Enemies" parent_id_path=PackedInt32Array(1874215775, 427720287) index="2" unique_id=2044081520 instance=ExtResource("10_770vq")]
+position = Vector2(1357, 529)
+
+[node name="CharacterBody2D3" parent="checkpoints/checkpoint/Enemies" parent_id_path=PackedInt32Array(1874215775, 427720287) index="3" unique_id=355572381 instance=ExtResource("10_770vq")]
+position = Vector2(-229, 448)
+
+[node name="CharacterBody2D2" parent="checkpoints/checkpoint/Enemies" parent_id_path=PackedInt32Array(1874215775, 427720287) index="4" unique_id=1076948701 instance=ExtResource("10_770vq")]
+position = Vector2(-173, 366)
+
+[node name="CollisionShape2D" parent="checkpoints/checkpoint/playArea" parent_id_path=PackedInt32Array(1874215775, 1736011037) index="0" unique_id=215983114]
+position = Vector2(578, 329)
+
+[editable path="checkpoints/checkpoint"]

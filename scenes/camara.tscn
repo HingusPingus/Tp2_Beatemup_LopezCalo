@@ -10,17 +10,17 @@ drag_vertical_enabled = true
 drag_vertical_offset = -0.6
 script = ExtResource("1_g5i2v")
 
-[node name="paredDer" type="StaticBody2D" parent="." unique_id=1756427170]
+[node name="paredIzq" type="StaticBody2D" parent="." unique_id=1756427170]
 position = Vector2(-563, -579)
-collision_layer = 255
+collision_layer = 16
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="paredDer" unique_id=1543749983]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="paredIzq" unique_id=1543749983]
 position = Vector2(-62, 554)
 shape = SubResource("RectangleShape2D_e77qm")
 
-[node name="paredIzq" type="StaticBody2D" parent="." unique_id=1716029243]
-collision_layer = 255
+[node name="paredDer" type="StaticBody2D" parent="." unique_id=1716029243]
+collision_layer = 16
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="paredIzq" unique_id=584222591]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="paredDer" unique_id=584222591]
 position = Vector2(628, -29)
 shape = SubResource("RectangleShape2D_e77qm")

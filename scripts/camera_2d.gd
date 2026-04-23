@@ -8,6 +8,8 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	if position.x<player.global_position.x:
+func _process(_delta: float) -> void:
+	if(position.x>1000 and get_parent().get_child_count()>3):
+		pass
+	elif position.x<player.global_position.x:
 		position.x=player.global_position.x

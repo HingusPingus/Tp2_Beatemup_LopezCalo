@@ -5,9 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://dci03tlc15q6t" path="res://scenes/character.tscn" id="1_usctx"]
 [ext_resource type="PackedScene" uid="uid://7wjep6auxcwh" path="res://scenes/camara.tscn" id="4_e77qm"]
 
-[node name="playground" type="Node2D" unique_id=1753927969 node_paths=PackedStringArray("player")]
+[node name="playground" type="Node2D" unique_id=1753927969]
 script = ExtResource("1_kx1yv")
-player = NodePath("player")
 
 [node name="stage" parent="." unique_id=803970439 instance=ExtResource("1_e77qm")]
 position = Vector2(326, -274)

@@ -7,6 +7,7 @@ class_name Character
 @onready var auch:Auch = $auch
 var speed
 const JUMP_VELOCITY = -400
+@export var type:Type
 
 var jumping=false
 var hitting=false
@@ -31,6 +32,8 @@ const right=1
 const left=-1
 var yPosition:float
 var looking=right
+
+enum Type{PLAYER,ENEMY,BOSS}
 
 func _physics_process(delta: float) -> void:
 	if jumping or falling:
@@ -89,8 +92,9 @@ func jump(wannaJump):
 			lying=false
 
 		jumping=false
-		set_collision_mask_value(4,false)
-		set_collision_mask_value(5,true)
+		if(self is Player):
+			set_collision_mask_value(4,false)
+			set_collision_mask_value(5,true)
 	elif velocity.y>0 and jumping and !hitting:
 		_animated_sprite.play("fall")
 	elif jumping and !hitting:
@@ -110,7 +114,6 @@ func animation_hit_cd():
 func take_damage(dmg,drained,pj):
 	get_hit=true
 	combo+=2
-	print("hit")
 
 	_animated_sprite.play("damage")
 	velocity.x=0
