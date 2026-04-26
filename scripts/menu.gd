@@ -2,7 +2,7 @@ extends Node2D
 
 
 func _on_jugar_pressed() -> void:
-	Global.stage="stage2"
+	Global.stage="stage1"
 
 	get_tree().change_scene_to_file("res://scenes/playground.tscn")
 
