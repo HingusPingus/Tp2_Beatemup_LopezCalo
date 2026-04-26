@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://d1dwct201cihw" path="res://scenes/checkpoint.tscn" id="6_k3p0l"]
 [ext_resource type="PackedScene" uid="uid://go372voukovs" path="res://scenes/enemy.tscn" id="7_ilkkl"]
 [ext_resource type="PackedScene" uid="uid://b3r7p6t1qlvty" path="res://scenes/big_enemy.tscn" id="8_kiwqh"]
-[ext_resource type="AudioStream" uid="uid://sgwuyve2ycc5" path="res://assets/sfx/bgm/Raining Blood - Slayer (128k).wav" id="9_pipme"]
+[ext_resource type="AudioStream" uid="uid://cymrfn3fv7m1b" path="res://assets/sfx/bgm/Slayer - Raining Blood (short version) - I Dig Metal (128k).wav" id="9_pipme"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s6chy"]
 texture = ExtResource("2_bnu0w")
@@ -433,6 +433,9 @@ sources/1 = SubResource("TileSetAtlasSource_hfdmh")
 sources/2 = SubResource("TileSetAtlasSource_ybch3")
 sources/3 = SubResource("TileSetAtlasSource_con43")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pipme"]
+size = Vector2(83, 670)
+
 [node name="stage" unique_id=803970439 instance=ExtResource("1_e77qm")]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." index="3" unique_id=1649846326]
@@ -494,6 +497,13 @@ position = Vector2(-173, 366)
 
 [node name="AudioStreamPlayer" parent="." index="7" unique_id=444946157]
 stream = ExtResource("9_pipme")
+
+[node name="LevelEnd" parent="." index="8" unique_id=513104145]
+nextscene = "stage2"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelEnd" index="0" unique_id=1774121468]
+position = Vector2(3394.5, 613)
+shape = SubResource("RectangleShape2D_pipme")
 
 [editable path="checkpoints/checkpoint"]
 [editable path="checkpoints/checkpoint3"]

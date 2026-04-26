@@ -5,6 +5,8 @@
 [ext_resource type="Script" uid="uid://d22iggmcjpqnb" path="res://scripts/health_bar.gd" id="3_l3wcf"]
 [ext_resource type="Texture2D" uid="uid://cndolvy3qlp83" path="res://assets/Kind of Techno Icons.png" id="4_i6rlm"]
 [ext_resource type="Script" uid="uid://cgdu5j0q02you" path="res://scripts/powerUI.gd" id="5_1nnf4"]
+[ext_resource type="Texture2D" uid="uid://bt2u4y3njuybm" path="res://assets/Number collection.png" id="6_cgqi0"]
+[ext_resource type="Script" uid="uid://t8fvtw084dgg" path="res://scripts/modeUI.gd" id="7_ig7iq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e77qm"]
 size = Vector2(104, 694)
@@ -86,6 +88,45 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_shujh"]
+atlas = ExtResource("6_cgqi0")
+region = Rect2(232, 702, 116, 234)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0p7e8"]
+atlas = ExtResource("6_cgqi0")
+region = Rect2(348, 936, 116, 234)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ske3f"]
+atlas = ExtResource("6_cgqi0")
+region = Rect2(464, 468, 116, 234)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4nc2c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_shujh")
+}],
+"loop": true,
+"name": &"1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0p7e8")
+}],
+"loop": true,
+"name": &"2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ske3f")
+}],
+"loop": true,
+"name": &"3",
+"speed": 5.0
+}]
+
 [node name="Camera2D" type="Camera2D" unique_id=1081808381]
 drag_vertical_enabled = true
 drag_vertical_offset = -0.6
@@ -122,3 +163,11 @@ scale = Vector2(2, 1.7083334)
 sprite_frames = SubResource("SpriteFrames_shujh")
 animation = &"0%"
 script = ExtResource("5_1nnf4")
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="." unique_id=1127772264]
+position = Vector2(-514.99994, -249.00003)
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_4nc2c")
+animation = &"2"
+frame_progress = 0.75628024
+script = ExtResource("7_ig7iq")

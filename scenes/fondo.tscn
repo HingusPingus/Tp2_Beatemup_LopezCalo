@@ -1,10 +1,11 @@
 [gd_scene format=3 uid="uid://cs48x5d4pnwit"]
 
 [ext_resource type="Texture2D" uid="uid://dmwnveqyuiixc" path="res://assets/City Background/Sky.png" id="1_4kc6w"]
-[ext_resource type="Script" uid="uid://bs1htt4o3fspx" path="res://scenes/fondo.gd" id="1_40mfy"]
+[ext_resource type="Script" uid="uid://bs1htt4o3fspx" path="res://scripts/fondo.gd" id="1_40mfy"]
 [ext_resource type="Texture2D" uid="uid://bx05vi1cepkm3" path="res://assets/City Background/City Background.png" id="2_boodw"]
 [ext_resource type="Texture2D" uid="uid://djl5iag5y8y" path="res://assets/City Background/City Foreground.png" id="3_40mfy"]
 [ext_resource type="PackedScene" uid="uid://bhki0i8ql4bqe" path="res://scenes/piso.tscn" id="4_boodw"]
+[ext_resource type="Script" uid="uid://dhc18hwgfk6r3" path="res://scripts/level_end.gd" id="6_r1p76"]
 
 [node name="stage" type="Node2D" unique_id=803970439]
 script = ExtResource("1_40mfy")
@@ -54,3 +55,7 @@ collision_mask = 255
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=444946157]
 volume_db = -12.425
+
+[node name="LevelEnd" type="Area2D" parent="." unique_id=513104145]
+position = Vector2(887, 228)
+script = ExtResource("6_r1p76")

@@ -20,13 +20,7 @@ func _process(_delta: float) -> void:
 				if(i is Auch and i.get_parent().getZIndex()<=z_index+30 and i.get_parent().getZIndex()>=z_index-30):
 					direction=Vector2.ZERO
 					super.punch()
-		#elif areaPersonal.
-			#for i in areaPersonal.get_overlapping_bodies():
-				#if i is Character and i.getZIndex()<=z_index+30 and i.getZIndex()>=z_index-30 and i!=self:
-					#print(pos*(i.global_position.x-global_position.x))
 
-					#if(pos*(i.global_position.x-global_position.x)>0):
-						#direction=Vector2.ZERO
 
 		super.jump(false)
 		var pos=player.global_position.x-global_position.x

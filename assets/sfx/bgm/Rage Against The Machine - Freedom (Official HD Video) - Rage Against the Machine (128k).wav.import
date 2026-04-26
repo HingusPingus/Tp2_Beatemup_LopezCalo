@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cm3p8elvfw43c"
+path="res://.godot/imported/Rage Against The Machine - Freedom (Official HD Video) - Rage Against the Machine (128k).wav-bfb710b0ae04ec404a98879a97b31e11.sample"
+
+[deps]
+
+source_file="res://assets/sfx/bgm/Rage Against The Machine - Freedom (Official HD Video) - Rage Against the Machine (128k).wav"
+dest_files=["res://.godot/imported/Rage Against The Machine - Freedom (Official HD Video) - Rage Against the Machine (128k).wav-bfb710b0ae04ec404a98879a97b31e11.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

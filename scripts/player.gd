@@ -11,7 +11,7 @@ func _ready() -> void:
 
 	Global.setHealthBar.emit(health)
 	pass
-
+	pwrUp=true
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -31,9 +31,9 @@ func _process(_delta: float) -> void:
 	var direction=Input.get_vector("ui_left","ui_right","ui_up","ui_down")
 	super.move(direction)
 	if(Input.is_action_just_pressed("alomancy_pull")):
-		pull()
+		pull(alomancy)
 	if(Input.is_action_just_pressed("alomancy_push")):
-		push()
+		push(alomancy)
 	if(Input.is_action_just_pressed("switch_drain")):
 		changeMode(1)
 	if(Input.is_action_just_pressed("switch_power")):
@@ -42,40 +42,9 @@ func _process(_delta: float) -> void:
 		changeMode(3)
 		
 		
-func pull():
-	if  can_attack and !falling and !lying and power>=10:
-		setPower(-10)
-		timer=get_tree().create_timer(punch_cd)
-		timer.timeout.connect(animation_cd)
-		hitting=true
-		if !jumping:
-			_animated_sprite.play("alomancy_pull")
-		else:
-			_animated_sprite.play("jump_alomancy_pull")
-		can_attack = false
-		timer=get_tree().create_timer(punch_cd)
-		timer.timeout.connect(cd_reset)
-		for i in alomancy.get_overlapping_areas():
-			if(i is Auch):
-				i.get_parent().fall(looking*-1,false, power)
-				
-func push():
-	if  can_attack and !falling and !lying and power>=10:
-		setPower(-10)
-		timer=get_tree().create_timer(punch_cd)
-		timer.timeout.connect(animation_cd)
-		hitting=true
-		if !jumping:
-			_animated_sprite.play("alomancy_push")
-		else:
-			_animated_sprite.play("jump_alomancy_push")
-		can_attack = false
-		timer=get_tree().create_timer(punch_cd)
-		timer.timeout.connect(cd_reset)
-		for i in alomancy.get_overlapping_areas():
-			if(i is Auch):
-				i.get_parent().fall(looking,false, power)
+
 func changeMode(choice):
+	Global.changeMode.emit(choice)
 	if choice==1:
 		pwrUp=false
 		drain=true
@@ -92,3 +61,6 @@ func changeMode(choice):
 func changeHealth(dmg):
 	health-=dmg
 	Global.setHealthBar.emit(health)
+	
+func die():
+	get_tree().change_scene_to_file("res://scenes/death_screen.tscn")

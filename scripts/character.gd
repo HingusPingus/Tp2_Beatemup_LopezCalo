@@ -16,6 +16,7 @@ var hitting=false
 var get_hit=false
 var falling=false
 var lying=false
+var dying=false
 
 var can_attack=true
 @export var punch_cd:float
@@ -49,8 +50,9 @@ func _physics_process(delta: float) -> void:
 
  
 		
-	if health<=0:
-		queue_free()
+	if health<=0 and !dying:
+		fall(null,false,null)
+		dying=true
 
 func cd_reset():
 	can_attack=true;
@@ -93,6 +95,8 @@ func jump(wannaJump):
 			_animated_sprite.play("lying")
 
 			await get_tree().create_timer(0.5).timeout
+			if(health<=0):
+				die()
 			set_collision_mask_value(4,false)
 			set_collision_mask_value(6,true)
 			lying=false
@@ -195,3 +199,40 @@ func setPower(pwer):
 	else:
 		power=0
 	Global.setPower.emit(power)
+func pull(alomancy):
+	if  can_attack and !falling and !lying and power>=10:
+		setPower(-10)
+		timer=get_tree().create_timer(punch_cd)
+		timer.timeout.connect(animation_cd)
+		hitting=true
+		if !jumping:
+			_animated_sprite.play("alomancy_pull")
+		else:
+			_animated_sprite.play("jump_alomancy_pull")
+		can_attack = false
+		timer=get_tree().create_timer(punch_cd)
+		timer.timeout.connect(cd_reset)
+		for i in alomancy.get_overlapping_areas():
+			if(i is Auch):
+				i.get_parent().fall(looking*-1,false, power)
+				
+func push(alomancy):
+	if  can_attack and !falling and !lying and power>=10:
+		setPower(-10)
+		timer=get_tree().create_timer(punch_cd)
+		timer.timeout.connect(animation_cd)
+		hitting=true
+		if !jumping:
+			_animated_sprite.play("alomancy_push")
+		else:
+			_animated_sprite.play("jump_alomancy_push")
+		can_attack = false
+		timer=get_tree().create_timer(punch_cd)
+		timer.timeout.connect(cd_reset)
+		for i in alomancy.get_overlapping_areas():
+			if(i is Auch):
+				i.get_parent().fall(looking,false, power)
+				
+func die():
+	queue_free()
+	return

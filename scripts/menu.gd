@@ -2,6 +2,8 @@ extends Node2D
 
 
 func _on_jugar_pressed() -> void:
+	Global.stage="stage2"
+
 	get_tree().change_scene_to_file("res://scenes/playground.tscn")
 
 func _on_configuracion_pressed() -> void:
