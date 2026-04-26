@@ -71,3 +71,5 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "VOLVER AL MENU
 "
+
+[connection signal="pressed" from="CenterContainer/Botones/Volver Al Menu" to="." method="_on_volver_al_menu_pressed"]

@@ -64,7 +64,6 @@ layout_mode = 2
 color = Color(0.3180196, 0.31801987, 0.31801972, 1)
 
 [node name="Botones" type="VBoxContainer" parent="CenterContainer" unique_id=1163729674]
-visible = false
 layout_mode = 2
 theme_override_constants/separation = 4
 
@@ -86,6 +85,7 @@ text = "SALIR
 "
 
 [node name="Config" type="VBoxContainer" parent="CenterContainer" unique_id=166695272]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 4
 
