@@ -26,6 +26,7 @@ var timer
 var combo=0
 @export var max_health:int
 @onready var health=max_health
+@export var max_power:int
 var power=0
 
 var drain=false
@@ -70,7 +71,7 @@ func fall(direction,drained,pwr):
 		velocity.x = -speed*dir
 	elif pwr:
 		velocity.x = (speed+pwr)*dir
-	changeHealth(pwr)
+		changeHealth(pwr/2)
 	falling=true;
 	yPosition = global_position.y + 1
 	_animated_sprite.play("fall_down")
@@ -82,7 +83,7 @@ func jump(wannaJump):
 		set_collision_mask_value(4,true)
 		set_collision_mask_value(5,false)
 
-	elif global_position.y>=yPosition:
+	elif global_position.y>yPosition-1 or is_on_floor():
 		if(falling):
 			lying=true
 			falling=false
@@ -163,17 +164,18 @@ func punch():
 		can_attack = false
 		timer=get_tree().create_timer(punch_cd)
 		timer.timeout.connect(cd_reset)
-		var totaldamage
+		var totaldamage=damage
 		if(pwrUp):
-			totaldamage=power
-			power-=5
+			totaldamage=power+damage
+			setPower(-5)
 		elif(drain):
 			totaldamage=damage/2
-			power+=10
-		else:
-			totaldamage=damage
-		if(healthy and health+damage/2<=max_health):
-			health+=damage/2
+			setPower(10)
+		if hitbox.has_overlapping_areas():
+			if healthy and health+damage/2<=max_health:
+				changeHealth(-damage/2)
+			$"piña/AudioStreamPlayer".play()
+
 		for i in hitbox.get_overlapping_areas():
 			if(i is Auch and i.get_parent().getZIndex()<=z_index+30 and i.get_parent().getZIndex()>=z_index-30):
 				i.get_parent().take_damage(totaldamage,drain,i)
@@ -184,3 +186,12 @@ func getZIndex():
 	
 func changeHealth(dmg):
 	health-=dmg
+
+func setPower(pwer):
+	if(power+pwer<=max_power and power+pwer>=0):
+		power+=pwer
+	elif( power+pwer>=0):
+		power=max_power
+	else:
+		power=0
+	Global.setPower.emit(power)

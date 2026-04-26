@@ -3,9 +3,88 @@
 [ext_resource type="Script" uid="uid://uetr0c2d6od1" path="res://scripts/camera_2d.gd" id="1_g5i2v"]
 [ext_resource type="PackedScene" uid="uid://cxv5y8qtg1l63" path="res://scenes/health_bar.tscn" id="2_bc1v1"]
 [ext_resource type="Script" uid="uid://d22iggmcjpqnb" path="res://scripts/health_bar.gd" id="3_l3wcf"]
+[ext_resource type="Texture2D" uid="uid://cndolvy3qlp83" path="res://assets/Kind of Techno Icons.png" id="4_i6rlm"]
+[ext_resource type="Script" uid="uid://cgdu5j0q02you" path="res://scripts/powerUI.gd" id="5_1nnf4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e77qm"]
 size = Vector2(104, 694)
+
+[sub_resource type="Theme" id="Theme_l3wcf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1nnf4"]
+atlas = ExtResource("4_i6rlm")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uev57"]
+atlas = ExtResource("4_i6rlm")
+region = Rect2(96, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cgqi0"]
+atlas = ExtResource("4_i6rlm")
+region = Rect2(0, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ig7iq"]
+atlas = ExtResource("4_i6rlm")
+region = Rect2(24, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_glqll"]
+atlas = ExtResource("4_i6rlm")
+region = Rect2(48, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1t4vf"]
+atlas = ExtResource("4_i6rlm")
+region = Rect2(72, 24, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_shujh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1nnf4")
+}],
+"loop": true,
+"name": &"0%",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uev57")
+}],
+"loop": true,
+"name": &"100%",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cgqi0")
+}],
+"loop": true,
+"name": &"20%",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ig7iq")
+}],
+"loop": true,
+"name": &"40%",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_glqll")
+}],
+"loop": true,
+"name": &"60%",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1t4vf")
+}],
+"loop": true,
+"name": &"80%",
+"speed": 5.0
+}]
 
 [node name="Camera2D" type="Camera2D" unique_id=1081808381]
 drag_vertical_enabled = true
@@ -32,6 +111,14 @@ offset_left = -528.0
 offset_top = -344.0
 offset_right = -232.0
 offset_bottom = -317.0
-max_value = 1000.0
+theme = SubResource("Theme_l3wcf")
+theme_type_variation = &"HealthBar"
 show_percentage = false
 script = ExtResource("3_l3wcf")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=378486466]
+position = Vector2(-502, -288.5)
+scale = Vector2(2, 1.7083334)
+sprite_frames = SubResource("SpriteFrames_shujh")
+animation = &"0%"
+script = ExtResource("5_1nnf4")

@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://br0v64bwss5us" path="res://scripts/bicho.gd" id="1_4ra3w"]
 [ext_resource type="Texture2D" uid="uid://dsdjgcj3g2bk2" path="res://assets/hero/player/player-spritemap-v9-redpants.png" id="1_md0e3"]
 [ext_resource type="Script" uid="uid://cer3vflk7o2j7" path="res://scripts/auch.gd" id="2_md0e3"]
+[ext_resource type="AudioStream" uid="uid://b5tq7nhrocpsk" path="res://assets/sfx/punch/punch_2.wav" id="3_5uy6h"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4ra3w"]
 atlas = ExtResource("1_md0e3")
@@ -179,6 +180,10 @@ collision_layer = 32
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="piña" unique_id=70860226]
 position = Vector2(0, -26)
 polygon = PackedVector2Array(-2, -22, 70, -29, 76, 1, 73, 25, 0, 19)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="piña" unique_id=693600163]
+stream = ExtResource("3_5uy6h")
+volume_db = -14.596
 
 [node name="auch" type="Area2D" parent="." unique_id=536753804]
 collision_layer = 32

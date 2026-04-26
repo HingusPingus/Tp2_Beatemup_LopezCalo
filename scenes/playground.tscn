@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://c70qmc5upw626"]
+
+[ext_resource type="Script" uid="uid://ou84i3w6h02e" path="res://scripts/playground.gd" id="1_q8s1k"]
+[ext_resource type="PackedScene" uid="uid://b5nh7h3q3v7u" path="res://scenes/stage_1.tscn" id="2_mm0a5"]
+[ext_resource type="PackedScene" uid="uid://dci03tlc15q6t" path="res://scenes/character.tscn" id="3_o6wi6"]
+[ext_resource type="PackedScene" uid="uid://7wjep6auxcwh" path="res://scenes/camara.tscn" id="4_emj6c"]
+
+[node name="playground" type="Node2D" unique_id=1753927969 node_paths=PackedStringArray("player")]
+script = ExtResource("1_q8s1k")
+player = NodePath("player")
+
+[node name="stage" parent="." unique_id=803970439 instance=ExtResource("2_mm0a5")]
+position = Vector2(452, -285)
+
+[node name="player" parent="." unique_id=905061377 instance=ExtResource("3_o6wi6")]
+position = Vector2(188, 620)
+collision_mask = 16
+platform_floor_layers = 4294967040
+
+[node name="Camera2D" parent="." unique_id=1081808381 instance=ExtResource("4_emj6c")]
+position = Vector2(563, 579)

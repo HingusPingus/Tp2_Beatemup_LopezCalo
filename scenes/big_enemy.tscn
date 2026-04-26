@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://br0v64bwss5us" path="res://scripts/bicho.gd" id="1_1do16"]
 [ext_resource type="Texture2D" uid="uid://dets2uwfd2fe" path="res://assets/hero/player/player-spritemap-v9-greypants.png" id="1_5tilj"]
 [ext_resource type="Script" uid="uid://cer3vflk7o2j7" path="res://scripts/auch.gd" id="2_1do16"]
+[ext_resource type="AudioStream" uid="uid://8nu570nn0kmb" path="res://assets/sfx/punch/punch_5.wav" id="3_pjxr6"]
+[ext_resource type="Script" uid="uid://dhqakse0jjiot" path="res://scripts/audio_stream_player.gd" id="4_axyt8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pjxr6"]
 atlas = ExtResource("1_5tilj")
@@ -169,19 +171,27 @@ damage = 50
 max_health = 500
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=611043336]
+position = Vector2(0, -42)
 scale = Vector2(6, 6)
 sprite_frames = SubResource("SpriteFrames_trxu4")
 animation = &"run"
 
 [node name="piña" type="Area2D" parent="." unique_id=1903599076]
+position = Vector2(0, -42)
 scale = Vector2(2, 2)
 collision_layer = 32
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="piña" unique_id=1712887795]
-position = Vector2(2.5, -11)
+position = Vector2(2.5, -6)
 polygon = PackedVector2Array(-2, -22, 70, -29, 76, 1, 73, 25, 0, 19)
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="piña" unique_id=91383099]
+stream = ExtResource("3_pjxr6")
+volume_db = -14.596
+script = ExtResource("4_axyt8")
+
 [node name="auch" type="Area2D" parent="." unique_id=520928777]
+position = Vector2(0, -42)
 collision_layer = 32
 script = ExtResource("2_1do16")
 
@@ -192,7 +202,7 @@ shape = SubResource("CapsuleShape2D_tb8xi")
 debug_color = Color(0.89308935, 0.17552009, 0.6688114, 0.41960785)
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=1702573121]
-position = Vector2(-7, 129)
+position = Vector2(-7, 74)
 rotation = 1.5707964
 scale = Vector2(2, 2)
 shape = SubResource("CapsuleShape2D_poh4n")

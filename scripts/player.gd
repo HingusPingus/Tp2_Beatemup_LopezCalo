@@ -5,15 +5,19 @@ class_name	Player
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	
+	await get_tree().process_frame
 	Global.setMaxValue.emit(max_health)
-	Global.setHealthBar.emit(health)
+	Global.setMaxPower.emit(max_power)
 
-	pass # Replace with function body.
+	Global.setHealthBar.emit(health)
+	pass
+
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
+
+
 	if Input.is_action_just_pressed("melee_attack"):
 		super.punch()
 	if  Input.is_action_pressed("ui_left") and looking==1 and !Input.is_action_pressed("ui_right") and !hitting:
@@ -40,7 +44,7 @@ func _process(_delta: float) -> void:
 		
 func pull():
 	if  can_attack and !falling and !lying and power>=10:
-		power-=10
+		setPower(-10)
 		timer=get_tree().create_timer(punch_cd)
 		timer.timeout.connect(animation_cd)
 		hitting=true
@@ -57,7 +61,7 @@ func pull():
 				
 func push():
 	if  can_attack and !falling and !lying and power>=10:
-		power-=10
+		setPower(-10)
 		timer=get_tree().create_timer(punch_cd)
 		timer.timeout.connect(animation_cd)
 		hitting=true
