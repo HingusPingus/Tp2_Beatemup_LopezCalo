@@ -35,8 +35,9 @@ func _physics_process(delta: float) -> void:
 
  
 		
-	if health<=0:
+	if health<=0 and !dying:
 		fall(null,false,null)
+		dying=true
 
 	super.jump(false)
 
