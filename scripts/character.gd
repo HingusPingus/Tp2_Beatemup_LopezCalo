@@ -157,6 +157,7 @@ func move(direction):
 	move_and_slide()
 		
 func punch():
+	#CORRRECCION Los timers de cosas que suceden muy seguido es mejor colocarlos directamente en la escena como un nodo
 	if  can_attack and !falling and !lying:
 		timer=get_tree().create_timer(0.25)
 		timer.timeout.connect(animation_cd)

@@ -6,7 +6,7 @@ func _ready() -> void:
 	Global.setPower.connect(setPower.bind())
 	Global.setMaxPower.connect(setMaxPower.bind())
 	
-func setPower(power):
+func setPower(power): 
 	match power*100/max_power:
 		var x when x>=0 and x<20:
 			play("0%")

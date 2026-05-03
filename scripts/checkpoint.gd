@@ -9,6 +9,7 @@ var activado=false
 
 func _ready() -> void:
 	detect.body_entered.connect(on_player_enter.bind())
+	#CORRECCION: Esto se hace una sola vez, se exporta esa data en un archivo y luego se levantan desde el archivo cuando la zona se activa. Igual se entiende el punto.
 	for enemy in enemies.get_children():
 		enemy_data.append(EnemyData.new(enemy.type, enemy.global_position))
 		enemy.queue_free()

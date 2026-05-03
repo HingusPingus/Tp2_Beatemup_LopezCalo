@@ -17,7 +17,8 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 
-
+	#CORRECCION: Cuando tenemos tantos inputs en general algunos se presionan menos que otros,
+	# como los cambios de modo. En ese caso es mejor usar la función _input(event) en lugar de _process(delta), que solo se dispara cuando un evento de input sucede
 	if Input.is_action_just_pressed("melee_attack"):
 		super.punch()
 	if  Input.is_action_pressed("ui_left") and looking==1 and !Input.is_action_pressed("ui_right") and !hitting:

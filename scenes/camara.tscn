@@ -161,7 +161,7 @@ script = ExtResource("3_l3wcf")
 position = Vector2(-502, -288.5)
 scale = Vector2(2, 1.7083334)
 sprite_frames = SubResource("SpriteFrames_shujh")
-animation = &"0%"
+animation = &"80%"
 script = ExtResource("5_1nnf4")
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="." unique_id=1127772264]
